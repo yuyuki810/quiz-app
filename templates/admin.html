@@ -1,0 +1,82 @@
+<!-- templates/admin.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クイズ管理画面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- 公開状態切り替え用のJavaScriptを読み込む -->
+    <script>
+        async function togglePublic(qId) {
+            const response = await fetch(`/admin/toggle_public/${qId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                const button = document.getElementById(`toggle-btn-${qId}`);
+                if (data.is_public) {
+                    button.textContent = '公開中';
+                    button.classList.remove('status-private');
+                    button.classList.add('status-public');
+                } else {
+                    button.textContent = '非公開';
+                    button.classList.remove('status-public');
+                    button.classList.add('status-private');
+                }
+            } else {
+                alert('状態の切り替えに失敗しました。');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>クイズ管理画面</h1>
+        
+        <a href="{{ url_for('add_question') }}" class="admin-btn">新しい問題を追加</a>
+        <a href="/" class="admin-btn" target="_blank">クイズサイトを開く</a>
+        <!-- 問題解放ボタンは削除 -->
+        <!-- <a href="/admin/release" class="admin-btn" target="_blank">次の問題を解放</a> -->
+
+        <h2>問題一覧</h2>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>問題文</th>
+                    <th>画像</th>
+                    <th>状態</th> <!-- ★追加 -->
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in questions %}
+                <tr>
+                    <td>{{ q.id }}</td>
+                    <td class="question-col">{{ q.question }}</td>
+                    <td>{{ q.image if q.image else 'なし' }}</td>
+                    <td>
+                        <!-- ★状態表示と切り替えボタン -->
+                        <button id="toggle-btn-{{ q.id }}" 
+                                class="status-toggle-btn {% if q.is_public %}status-public{% else %}status-private{% endif %}"
+                                onclick="togglePublic({{ q.id }})">
+                            {% if q.is_public %}公開中{% else %}非公開{% endif %}
+                        </button>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('edit_question', q_id=q.id) }}">編集</a>
+                        <form action="{{ url_for('delete_question', q_id=q.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
+                            <button type="submit" class="delete-btn">削除</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!-- templates/edit_question.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <!-- 画像アップロードには enctype="multipart/form-data" が必須 -->
+        <form method="POST" enctype="multipart/form-data" class="admin-form">
+            <label for="question">問題文:</label>
+            <textarea id="question" name="question" required>{{ question.question if question }}</textarea>
+
+            <label for="option1">選択肢1:</label>
+            <input type="text" id="option1" name="option1" value="{{ question.options[0] if question }}" required>
+
+            <label for="option2">選択肢2:</label>
+            <input type="text" id="option2" name="option2" value="{{ question.options[1] if question }}" required>
+
+            <label for="option3">選択肢3:</label>
+            <input type="text" id="option3" name="option3" value="{{ question.options[2] if question }}" required>
+
+            <label for="answer">正解の選択肢:</label>
+            <input type="text" id="answer" name="answer" value="{{ question.answer if question }}" required>
+
+            <label for="image">関連画像 (任意):</label>
+            {% if question and question.image %}
+                <p>現在の画像: {{ question.image }} <img src="{{ url_for('static', filename='images/' + question.image) }}" width="100"></p>
+            {% endif %}
+            <input type="file" id="image" name="image" accept="image/*">
+            
+            <button type="submit" class="admin-btn">保存する</button>
+        </form>
+        
+        <a href="{{ url_for('admin_page') }}">一覧に戻る</a>
+    </div>
+</body>
+</html>

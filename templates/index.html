@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント連動型クイズ</title>
+    <!-- CSSファイルを読み込む -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>イベント連動型クイズ</h1>
+
+        <!-- 問題選択リストが表示されるエリア -->
+        <div id="question-list-container">
+            <h2>問題リスト</h2>
+            <div id="question-list">
+                <!-- JavaScriptによって動的にボタンが生成される -->
+            </div>
+        </div>
+
+        <!-- クイズ本体が表示されるエリア（初期状態では非表示） -->
+        <div id="quiz-container" class="hidden">
+            <h2 id="question-text"></h2>
+            <div id="options-container">
+                <!-- JavaScriptによって選択肢ボタンが生成される -->
+            </div>
+            <div id="result-message"></div>
+        </div>
+
+        <!-- 全問正解時のメッセージエリア（初期状態では非表示） -->
+        <div id="clear-message" class="hidden">
+            <h2>🎉 クリアおめでとうございます！ 🎉</h2>
+        </div>
+    </div>
+
+    <!-- JavaScriptファイルを読み込む -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
