@@ -1,247 +1,174 @@
 /* static/style.css */
 
-/* 全体のスタイル */
+/* --- ページ全体の基本設定 --- */
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    /* 1. 背景画像の設定 (ファイル名は適宜変更してください) */
+    background-image: url('/static/images/background.jpg');
+    background-color: #1a1a2e; /* 画像が読み込めない時の背景色 */
+
+    /* 2. 画像の表示方法 */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    /* 3. 文字の基本設定 */
+    color: #ffffff;
+    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+    margin: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 上寄せに変更 */
+    align-items: flex-start; /* コンテンツが長い場合に備えて上寄せ */
     min-height: 100vh;
-    margin: 0;
-    padding: 2rem 0; /* 上下に余白を追加 */
+    box-sizing: border-box; /* paddingを含めた高さ計算 */
 }
 
+/* --- コンテンツを囲むメインのボックス --- */
 .container {
-    background-color: white;
-    padding: 2rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 800px; /* 少し幅を広げる */
+    width: 100%;
+    max-width: 600px;
+    background-color: rgba(26, 26, 46, 0.9);
+    padding: 30px 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     text-align: center;
+    box-sizing: border-box;
 }
 
+/* --- 見出しのスタイル --- */
 h1 {
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffc107; /* 目立つ金色 */
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
 }
-
 h2 {
-    color: #34495e;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 0.5rem;
-    margin-top: 2rem;
+    font-size: 24px;
+    color: #f0f0f0;
+    margin-top: 30px;
+    border-bottom: 1px solid rgba(255, 193, 7, 0.5);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-/* 汎用クラス */
-.hidden {
-    display: none;
+/* --- 問題リストのスタイル --- */
+#question-list-container {
+    margin-bottom: 2rem;
 }
-
-/* --- クイズプレイヤー画面のスタイル --- */
 #question-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    margin-top: 1.5rem;
 }
 
 .question-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid #ffc107;
     padding: 0.8rem 1.2rem;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
 }
 
 .question-btn:hover:not(:disabled) {
-    background-color: #2980b9;
-    transform: translateY(-2px);
+    background-color: #ffc107;
+    color: #1a1a2e;
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
 }
 
 .question-btn.locked {
-    background-color: #bdc3c7;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
     cursor: not-allowed;
 }
 
 .question-btn.answered {
-    background-color: #2ecc71;
-    border: 2px solid #27ae60;
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
 }
 .question-btn.answered:hover {
-    background-color: #27ae60;
+    background-color: #218838;
 }
 
+/* --- クイズ本体のスタイル --- */
 #quiz-container {
-    margin-top: 2rem;
+    margin-top: 20px;
 }
-
-#quiz-image {
+.quiz-image {
     max-width: 100%;
     max-height: 300px;
     margin-bottom: 1.5rem;
     border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
-
+#question-text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    min-height: 50px; /* 問題文がない時も高さを確保 */
+}
 #options-container {
-    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-}
-
-.option-btn {
-    background-color: #ecf0f1;
-    color: #34495e;
-    border: 2px solid #bdc3c7;
-    padding: 1rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.option-btn:hover {
-    background-color: #d2dce1;
-    border-color: #95a5a6;
-}
-
-#result-message {
     margin-top: 1.5rem;
-    font-size: 1.2rem;
+}
+.option-btn { /* 選択肢ボタン */
+    padding: 12px;
+    font-size: 18px;
     font-weight: bold;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.option-btn:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #ffc107;
+}
+.option-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
+
+/* --- 結果表示のスタイル --- */
+#result-message {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    min-height: 30px; /* 結果がない時も高さを確保 */
+}
 .correct {
-    color: #27ae60;
+    color: #28a745;
+    text-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
 }
-
 .incorrect {
-    color: #c0392b;
+    color: #dc3545;
+    text-shadow: 0 0 8px rgba(220, 53, 69, 0.8);
 }
 
 
-/* --- 管理画面のスタイル --- */
-.admin-btn {
-    display: inline-block;
-    background-color: #16a085;
-    color: white;
-    padding: 0.7rem 1.2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 0.5rem;
-    transition: background-color 0.3s;
-}
-.admin-btn:hover {
-    background-color: #1abc9c;
+/* --- 全問クリアメッセージ --- */
+#clear-message h2 {
+    font-size: 32px;
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.8);
+    line-height: 1.4;
 }
 
-.admin-table {
-    width: 100%;
-    margin-top: 2rem;
-    border-collapse: collapse;
-}
-.admin-table th, .admin-table td {
-    border: 1px solid #ddd;
-    padding: 0.8rem;
-    text-align: left;
-    vertical-align: middle; /* 上下中央揃え */
-}
-.admin-table th {
-    background-color: #f2f2f2;
-}
-.question-col {
-    max-width: 250px;
-    word-wrap: break-word;
-}
-.delete-btn {
-    background: none;
-    border: none;
-    color: #c0392b;
-    cursor: pointer;
-    text-decoration: underline;
-    padding: 0;
-    font-size: 1em;
-}
-
-/* 管理画面の公開状態切り替えボタン */
-.status-toggle-btn {
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 0.9em;
-    min-width: 80px; /* 幅を固定 */
-    transition: background-color 0.3s;
-}
-
-.status-public {
-    background-color: #28a745; /* 緑色 */
-}
-
-.status-public:hover {
-    background-color: #218838;
-}
-
-.status-private {
-    background-color: #dc3545; /* 赤色 */
-}
-
-.status-private:hover {
-    background-color: #c82333;
-}
-
-
-/* 編集・追加フォームのスタイル */
-.admin-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    text-align: left;
-    margin-top: 2rem;
-}
-.admin-form label {
-    font-weight: bold;
-}
-.admin-form input[type="text"], .admin-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* paddingを含めた幅計算に */
-}
-.admin-form textarea {
-    min-height: 100px;
-}
-.admin-form a {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-/* 編集画面のチェックボックス用 */
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 5px;
-}
-.checkbox-group input[type="checkbox"] {
-    width: auto; /* チェックボックスの幅を自動に */
-    margin: 0;
-    transform: scale(1.5); /* チェックボックスを少し大きく */
-}
-.checkbox-group label {
-    font-weight: normal;
-    margin: 0;
+/* 汎用クラス */
+.hidden {
+    display: none;
 }
