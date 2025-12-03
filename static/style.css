@@ -2,9 +2,9 @@
 
 /* --- ページ全体の基本設定 --- */
 body {
-    /* 1. 背景画像の設定 (ファイル名は適宜変更してください) */
+    /* 1. 背景画像の設定 */
     background-image: url('/static/images/background.jpg');
-    background-color: #1a1a2e; /* 画像が読み込めない時の背景色 */
+    background-color: #f0f4f8; /* 画像が読み込めない時の明るい背景色 */
 
     /* 2. 画像の表示方法 */
     background-size: cover;
@@ -13,44 +13,45 @@ body {
     background-attachment: fixed;
 
     /* 3. 文字の基本設定 */
-    color: #ffffff;
+    color: #333; /* 基本の文字色を濃いグレーに */
     font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* コンテンツが長い場合に備えて上寄せ */
+    align-items: flex-start;
     min-height: 100vh;
-    box-sizing: border-box; /* paddingを含めた高さ計算 */
+    box-sizing: border-box;
 }
 
 /* --- コンテンツを囲むメインのボックス --- */
 .container {
     width: 100%;
-    max-width: 600px;
-    background-color: rgba(26, 26, 46, 0.9);
+    max-width: 650px; /* 少し幅を広げる */
+    /* 背景を白の半透明にして、どんな背景でもコンテンツを読みやすくする */
+    background-color: rgba(255, 255, 255, 0.88); 
     padding: 30px 40px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* 影を少し強調 */
     text-align: center;
     box-sizing: border-box;
 }
 
 /* --- 見出しのスタイル --- */
 h1 {
-    font-size: 28px;
+    font-size: 32px; /* 少し大きく */
     font-weight: bold;
-    color: #ffc107; /* 目立つ金色 */
+    color: #005a9c; /* 画像の空の色に合わせた深い青 */
     margin-top: 0;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7); /* 白い影で少し浮かせる */
 }
 h2 {
-    font-size: 24px;
-    color: #f0f0f0;
+    font-size: 26px;
+    color: #333; /* 文字色を濃いグレーに */
     margin-top: 30px;
-    border-bottom: 1px solid rgba(255, 193, 7, 0.5);
+    border-bottom: 1px solid rgba(0, 90, 156, 0.3); /* 青系の薄い線 */
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -67,36 +68,39 @@ h2 {
 }
 
 .question-btn {
-    background-color: rgba(255, 193, 7, 0.2);
-    color: #ffc107;
-    border: 1px solid #ffc107;
+    background-color: #007bff; /* 明るい青 */
+    color: #ffffff;
+    border: 1px solid #007bff;
     padding: 0.8rem 1.2rem;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .question-btn:hover:not(:disabled) {
-    background-color: #ffc107;
-    color: #1a1a2e;
-    box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+    background-color: #0056b3; /* 少し濃い青 */
+    border-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .question-btn.locked {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.4);
-    border-color: rgba(255, 255, 255, 0.2);
+    background-color: #e9ecef; /* 明るいグレー */
+    color: #6c757d; /* グレーの文字 */
+    border-color: #ced4da;
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .question-btn.answered {
-    background-color: #28a745;
-    border-color: #28a745;
-    color: white;
+    background-color: #ffd700; /* 金色 */
+    border-color: #ffd700;
+    color: #333;
 }
 .question-btn.answered:hover {
-    background-color: #218838;
+    background-color: #e6c300;
 }
 
 /* --- クイズ本体のスタイル --- */
@@ -105,16 +109,18 @@ h2 {
 }
 .quiz-image {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 350px; /* 少し大きく */
     margin-bottom: 1.5rem;
     border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 #question-text {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 1.1rem; /* 少し大きく */
+    line-height: 1.7;
     margin-bottom: 25px;
-    min-height: 50px; /* 問題文がない時も高さを確保 */
+    min-height: 50px;
+    color: #111; /* 文字色をより濃くして可読性を上げる */
 }
 #options-container {
     display: flex;
@@ -123,22 +129,22 @@ h2 {
     margin-top: 1.5rem;
 }
 .option-btn { /* 選択肢ボタン */
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: transparent;
-    border: 2px solid #ffffff;
+    padding: 14px; /* 少し大きく */
+    font-size: 1.1rem;
+    font-weight: 500; /* 少し細く */
+    color: #007bff;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid #007bff;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 .option-btn:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: #ffc107;
+    background-color: #007bff;
+    color: #ffffff;
 }
 .option-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
@@ -146,26 +152,24 @@ h2 {
 /* --- 結果表示のスタイル --- */
 #result-message {
     margin-top: 25px;
-    font-size: 22px;
+    font-size: 1.5rem; /* 大きく */
     font-weight: bold;
-    min-height: 30px; /* 結果がない時も高さを確保 */
+    min-height: 30px;
 }
 .correct {
-    color: #28a745;
-    text-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+    color: #28a745; /* 緑色 */
 }
 .incorrect {
-    color: #dc3545;
-    text-shadow: 0 0 8px rgba(220, 53, 69, 0.8);
+    color: #dc3545; /* 赤色 */
 }
 
 
 /* --- 全問クリアメッセージ --- */
 #clear-message h2 {
-    font-size: 32px;
-    color: #ffc107;
-    text-shadow: 0 0 10px rgba(255, 193, 7, 0.8);
+    font-size: 2.2rem; /* 大きく */
+    color: #005a9c;
     line-height: 1.4;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
 }
 
 /* 汎用クラス */
