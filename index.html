@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リミットゼロブレイカーズ 謎解き大作戦！</title>
+    
+    <!-- CSS（デザイン設定）はここに記述します -->
+    <style>
+        /* ページ全体の基本設定 */
+        body {
+            /* --- 背景画像の設定 --- */
+            /* 1. 画像ファイルを指定 (imagesフォルダの中のbackground.jpg) */
+            background-image: url('images/background.jpg'); 
+
+            /* 2. 画像が読み込めない時の背景色 */
+            background-color: #1a1a2e; /* 濃い青紫色 */
+
+            /* 3. 画像の表示方法 */
+            background-size: cover;                /* 画面全体を覆うように表示 */
+            background-position: center center;    /* 画像を中央に配置 */
+            background-repeat: no-repeat;          /* 画像を繰り返さない */
+            background-attachment: fixed;          /* スクロールしても背景を固定 */
+
+            /* --- 文字の基本設定 --- */
+            color: #ffffff; /* 基本の文字色を白に */
+            font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+            margin: 0; /* ページの余白をなくす */
+            padding: 20px; /* 画面の端にコンテンツがくっつかないように内側の余白を設定 */
+            display: flex; /* 中央揃えのためにFlexboxを使用 */
+            justify-content: center; /* 水平方向の中央揃え */
+            align-items: center;     /* 垂直方向の中央揃え */
+            min-height: 100vh;       /* 画面の高さいっぱいに表示 */
+        }
+
+        /* クイズコンテンツを囲むボックスのデザイン */
+        .quiz-container {
+            width: 100%;
+            max-width: 600px; /* ボックスの最大幅 */
+            background-color: rgba(26, 26, 46, 0.85); /* 半透明の濃い青紫色 (0.85は透明度) */
+            padding: 30px 40px;
+            border-radius: 15px; /* 角を丸くする */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* うっすらと白い境界線 */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); /* 背景から浮き上がって見えるように影をつける */
+            text-align: center; /*中の文字などを中央揃えに */
+        }
+
+        /* タイトルのデザイン */
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffc107; /* 目立つ金色 */
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.7); /* 少し光っているような効果 */
+        }
+
+        /* 問題文のデザイン */
+        p {
+            font-size: 18px;
+            line-height: 1.6; /* 行間を少し広げて読みやすく */
+            margin-bottom: 25px;
+        }
+
+        /* 解答入力欄のデザイン */
+        .answer-input {
+            width: 80%;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        /* 入力欄にカーソルが当たった時のデザイン */
+        .answer-input:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* 解答ボタンのデザイン */
+        .submit-button {
+            width: 60%;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a1a2e; /* ボタンの文字色 */
+            background-color: #ffc107; /* ボタンの背景色 */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer; /* マウスカーソルを指の形に */
+            transition: all 0.3s ease; /* アニメーション効果 */
+        }
+        /* ボタンにマウスが乗った時のデザイン */
+        .submit-button:hover {
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ↓↓↓ クイズのコンテンツはここに記述します ↓↓↓ -->
+    <div class="quiz-container">
+        <h1>第1問</h1>
+        <p>
+            ここに謎解きの問題文が入ります。<br>
+            カイトたちに代わって、君がこの謎を解き明かせるかな？
+        </p>
+
+        <!-- 解答フォーム -->
+        <form onsubmit="alert('解答を送信しました！'); return false;">
+            <input type="text" class="answer-input" placeholder="答えを入力">
+            <br>
+            <button type="submit" class="submit-button">解答する</button>
+        </form>
+    </div>
+    <!-- ↑↑↑ クイズのコンテンツはここまで ↑↑↑ -->
+
+</body>
+</html>
